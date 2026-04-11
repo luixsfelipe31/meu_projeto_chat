@@ -1,0 +1,350 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LinguaConnect</title>
+
+    <link rel="stylesheet" href="{% static 'usuarios/style.css' %}?v=3">
+
+    <style>
+        body {
+            margin: 0;  
+            font-family: Arial, sans-serif;
+        }
+
+        /* 🔥 NAVBAR */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background: white;
+        }
+
+        .navbar h2 {
+            color: #2563eb;
+        }
+
+        .nav-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #334155;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-login {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-cadastro {
+            background: #22c55e;
+            color: white;
+        }
+
+        /* 🔥 HERO */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 80px;
+            background: linear-gradient(to right, #3b82f6, #22c55e);
+            color: white;
+        }
+
+        .hero-text {
+            max-width: 500px;
+        }
+
+        .hero-text h1 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            margin-bottom: 20px;
+        }
+
+        .hero-text button {
+            padding: 12px 20px;
+            border-radius: 6px;
+            border: none;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #2563eb;
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.3);
+            color: white;
+        }
+
+        /* 🔥 CHAT MOCKUP */
+        .chat-mock {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+        }
+
+        .msg {
+            background: #e5e7eb;
+            padding: 8px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .msg.me {
+            background: #3b82f6;
+            color: white;
+            text-align: right;
+        }
+
+        /* 🌍 IDIOMAS */
+        .idiomas-section {
+            text-align: center;
+            padding: 80px 40px;
+            background: #f8fafc;
+        }
+
+        .idiomas-section h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .idiomas-section p {
+            color: #64748b;
+            margin-bottom: 40px;
+        }
+
+        .idiomas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .idioma-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .idioma-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .idioma-card h3 {
+            margin: 10px 0 5px;
+        }
+
+        .idioma-card span {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .ver-todos {
+            display: inline-block;
+            margin-top: 30px;
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- 🔥 NAVBAR -->
+<div class="navbar">
+    <h2>🌍 LinguaConnect</h2>
+
+    <div class="nav-links">
+        <a href="#">Como Funciona</a>
+        <a href="#">Idiomas</a>
+        <a href="#">Comunidade</a>
+
+        <a href="/login/"><button class="btn btn-login">Entrar</button></a>
+        <a href="/cadastro/"><button class="btn btn-cadastro">Cadastrar</button></a>
+    </div>
+</div>
+
+<!-- 🔥 HERO -->
+<div class="hero">
+
+    <div class="hero-text">
+        <h1>Conecte-se e aprenda idiomas com pessoas reais</h1>
+
+        <p>
+            Pratique com falantes nativos, faça amigos e evolua no idioma de forma natural.
+        </p>
+
+        <a href="/match/">
+            <button class="btn-primary">Comece Agora</button>
+        </a>
+
+        <button class="btn-secondary">Saiba mais</button>
+    </div>
+
+    <div class="chat-mock">
+        <div class="msg">Hi! I'm learning English</div>
+        <div class="msg me">Oi! Posso te ajudar 😄</div>
+        <div class="msg">Thank you!</div>
+    </div>
+
+</div>
+
+<!-- 🌍 NOVA SEÇÃO -->
+<div class="idiomas-section">
+
+    <h2>Idiomas Populares</h2>
+    <p>Conecte-se com falantes de mais de 50 idiomas ao redor do mundo.</p>
+
+    <div class="idiomas-grid">
+
+        <div class="idioma-card">🇬🇧<h3>Inglês</h3><span>120M+ aprendizes</span></div>
+        <div class="idioma-card">🇪🇸<h3>Espanhol</h3><span>95M+ aprendizes</span></div>
+        <div class="idioma-card">🇫🇷<h3>Francês</h3><span>80M+ aprendizes</span></div>
+        <div class="idioma-card">🇨🇳<h3>Mandarim</h3><span>75M+ aprendizes</span></div>
+        <div class="idioma-card">🇯🇵<h3>Japonês</h3><span>50M+ aprendizes</span></div>
+        <div class="idioma-card">🇰🇷<h3>Coreano</h3><span>40M+ aprendizes</span></div>
+
+        <div class="idioma-card">🇮🇹<h3>Italiano</h3><span>35M+ aprendizes</span></div>
+        <div class="idioma-card">🇩🇪<h3>Alemão</h3><span>30M+ aprendizes</span></div>
+        <div class="idioma-card">🇵🇹<h3>Português</h3><span>28M+ aprendizes</span></div>
+        <div class="idioma-card">🇷🇺<h3>Russo</h3><span>25M+ aprendizes</span></div>
+        <div class="idioma-card">🇦🇪<h3>Árabe</h3><span>20M+ aprendizes</span></div>
+        <div class="idioma-card">🇳🇱<h3>Holandês</h3><span>15M+ aprendizes</span></div>
+
+    </div>
+
+    <a href="#" class="ver-todos">Ver todos os idiomas →</a>
+
+</div>
+
+<!-- 💬 TESTEMUNHOS -->
+<div class="testemunhos">
+
+    <h2>O Que Dizem Nossos Usuários</h2>
+    <p>Histórias reais de pessoas que melhoraram suas habilidades linguísticas com o LinguaConnect.</p>
+
+    <div class="cards-testemunhos">
+
+        <div class="card-test">
+            <h3>Marcelo Silva</h3>
+            <span>Brasil • Aprendendo Espanhol</span>
+            <p>
+                "O LinguaConnect transformou minha forma de aprender espanhol.
+                Conversar com nativos todos os dias acelerou muito meu aprendizado."
+            </p>
+            ⭐⭐⭐⭐⭐
+        </div>
+
+        <div class="card-test">
+            <h3>Juliana Costa</h3>
+            <span>Brasil • Aprendendo Francês</span>
+            <p>
+                "Encontrei parceiros incríveis! Aprender ficou muito mais divertido
+                e natural com conversas reais."
+            </p>
+            ⭐⭐⭐⭐⭐
+        </div>
+
+        <div class="card-test">
+            <h3>Ricardo Mendes</h3>
+            <span>Portugal • Professor de Inglês</span>
+            <p>
+                "Recomendo a todos meus alunos. A prática conversacional aqui é
+                excelente e muito eficiente."
+            </p>
+            ⭐⭐⭐⭐⭐
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 🚀 CALL TO ACTION -->
+<div class="cta">
+
+    <h2>Pronto para começar sua jornada linguística?</h2>
+
+    <p>
+        Junte-se a milhares de pessoas e comece a aprender de forma prática e real.
+    </p>
+
+    <a href="/cadastro/">
+        <button class="btn-cta">Cadastre-se Gratuitamente</button>
+    </a>
+
+</div>
+
+<!-- 🔻 RODAPÉ -->
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <!-- LOGO + DESC -->
+        <div class="footer-col">
+            <h2>🌍 LinguaConnect</h2>
+            <p>Conectando pessoas através de idiomas e culturas ao redor do mundo.</p>
+
+            
+        </div>
+
+        <!-- PLATAFORMA -->
+        <div class="footer-col">
+            <h3>Plataforma</h3>
+            <a href="#">Como Funciona</a>
+            <a href="#">Recursos</a>
+            <a href="#">Preços</a>
+            <a href="#">FAQ</a>
+        </div>
+
+        <!-- RECURSOS -->
+        <div class="footer-col">
+            <h3>Recursos</h3>
+            <a href="#">Idiomas Disponíveis</a>
+            <a href="#">Comunidade</a>
+            <a href="#">Parceiros</a>
+            <a href="#">Blog</a>
+        </div>
+
+        <!-- LEGAL -->
+        <div class="footer-col">
+            <h3>Legal</h3>
+            <a href="#">Política de Privacidade</a>
+            <a href="#">Termos de Uso</a>
+            <a href="#">Política de Cookies</a>
+            <a href="#">Contato</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 LinguaConnect. Todos os direitos reservados.
+    </div>
+
+</footer>
+
+
+
+
+
+</body>
+</html>

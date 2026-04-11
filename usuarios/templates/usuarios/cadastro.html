@@ -1,0 +1,35 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cadastro 👤</title>
+    <link rel="stylesheet" href="{% static 'usuarios/style.css' %}">
+</head>
+<body>
+
+<div class="form-container">
+    <h1>Cadastro 👤</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <input type="text" name="username" placeholder="Usuário"><br><br>
+    <input type="password" name="password" placeholder="Senha"><br><br>
+
+    <input type="text" name="idioma_nativo" placeholder="Idioma nativo"><br><br>
+    <input type="text" name="idioma_aprendizado" placeholder="Idioma que quer aprender"><br><br>
+    <input type="text" name="interesses" placeholder="Interesses"><br><br>
+
+    <!-- 🔥 FOTO -->
+    <input type="file" name="foto"><br><br>
+
+    <button type="submit">Cadastrar</button>
+</form>
+
+    <p>Já tem conta? <a href="/login/">Faça login</a></p>
+</div>
+
+</body>
+</html>

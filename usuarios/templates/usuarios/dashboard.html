@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'usuarios/style.css' %}?v=5">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    <header>
+        <h1>🌍 Minha Plataforma</h1>
+
+        <a href="/login/">
+            <button class="btn-logout">Sair</button>
+        </a>
+    </header>
+    <h2>Bem-vindo, {{ usuario_nome }} 👋</h2>
+    <h3>O que você quer fazer hoje?</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h2>👥 Encontrar parceiro</h2>
+            <p>Conecte-se com pessoas para praticar idiomas</p>
+            <a href="/match/">
+            <button>Explorar</button>
+            </a> 
+        </div>
+
+        <div class="card">
+            <h2>💬 Chat</h2>
+            <p>Converse com seus parceiros</p>
+            <button>Abrir</button>
+        </div>
+
+        <div class="card">
+            <h2>📚 Praticar</h2>
+            <p>Exercícios rápidos estilo Duolingo</p>
+            <button>Começar</button>
+        </div>
+
+        <div class="card">
+            <h2>📈 Progresso</h2>
+            <p>Veja sua evolução</p>
+            <button>Ver</button>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

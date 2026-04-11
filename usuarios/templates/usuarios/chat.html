@@ -1,0 +1,234 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+    <link rel="stylesheet" href="{% static 'usuarios/style.css' %}">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #e5e7eb;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #1e293b;
+            color: white;
+            padding: 20px;
+        }
+
+        .user {
+            padding: 10px;
+            border-bottom: 1px solid #334155;
+            cursor: pointer;
+        }
+
+        .user:hover {
+            background: #334155;
+        }
+
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: #3b82f6;
+            color: white;
+            padding: 15px;
+        }
+
+        .chat-box {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message {
+            max-width: 60%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+
+        .me {
+            background: #3b82f6;
+            color: white;
+            align-self: flex-end;
+        }
+
+        .other {
+            background: white;
+            border: 1px solid #cbd5e1;
+            align-self: flex-start;
+        }
+
+        .time {
+            font-size: 10px;
+            opacity: 0.6;
+            text-align: right;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            background: white;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+        }
+
+        .chat-input button {
+            margin-left: 10px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px;
+        }
+
+        #notificacao {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #22c55e;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: none;
+        }
+    </style>
+</head>
+<class="chat-page">
+<body>
+
+<div class="navbar">
+    ...
+</div>
+
+<div id="notificacao">Nova mensagem 💬</div>
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h2>💬 Conversas</h2>
+
+        {% for u in usuarios_conversas %}
+            <a href="/chat/{{ u.id }}/" style="color:white;text-decoration:none;">
+                <div class="user">{{ u.username }}</div>
+            </a>
+        {% endfor %}
+    </div>
+
+    <!-- CHAT -->
+    <div class="chat-area">
+
+        <div class="chat-header">
+            Conversando com {{ destinatario.username }}
+        </div>
+
+        <div class="chat-box" id="chat-box">
+    {% for msg in mensagens %}
+
+        <div class="message {% if msg.remetente.username == request.session.usuario_nome %}me{% else %}other{% endif %}">
+            
+            <div class="avatar">
+                {{ msg.remetente.username|first|upper }}
+            </div>
+
+            <div class="bubble">
+                {{ msg.texto }}
+
+                <div class="time">
+                    {{ msg.criado_em|date:"H:i" }}
+                </div>
+            </div>
+
+        </div>
+
+    {% endfor %}
+</div>
+<!-- 🔥 NÃO PODE SUMIR -->
+    <div class="chat-input">
+        <input type="text" id="mensagem" placeholder="Digite...">
+        <button onclick="enviar()">Enviar</button>
+    </div>
+
+</div>
+<script>
+const ws_scheme = window.location.protocol === "https:" ? "wss" : "ws";
+const userId = "{{ destinatario.id }}";
+
+const chatSocket = new WebSocket(
+    `${ws_scheme}://${window.location.host}/ws/chat/${userId}/`
+);
+
+// RECEBER
+chatSocket.onmessage = function(e) {
+    const data = JSON.parse(e.data);
+    adicionarMensagem(data.message, false);
+    mostrarNotificacao();
+};
+
+// ENVIAR
+function enviar() {
+    let input = document.getElementById("mensagem");
+    let texto = input.value;
+
+    if (texto.trim() === "") return;
+
+    chatSocket.send(JSON.stringify({
+        'message': texto
+    }));
+
+    adicionarMensagem(texto, true);
+    input.value = "";
+}
+
+// ADICIONAR NA TELA
+function adicionarMensagem(texto, isMe) {
+    const chatBox = document.getElementById("chat-box");
+
+    const div = document.createElement("div");
+    div.classList.add("message");
+    div.classList.add(isMe ? "me" : "other");
+
+    div.innerHTML = `
+    
+        <div class="bubble">
+            ${texto}
+            <div class="time">agora</div>
+        </div>
+    `;
+
+    chatBox.appendChild(div);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// NOTIFICAÇÃO
+function mostrarNotificacao() {
+    const notif = document.getElementById("notificacao");
+    notif.style.display = "block";
+
+    setTimeout(() => {
+        notif.style.display = "none";
+    }, 2000);
+}
+</script>
+
+</body>
+</html>
