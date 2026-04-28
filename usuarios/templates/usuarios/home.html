@@ -170,19 +170,8 @@
 
 <body>
 
-<!-- 🔥 NAVBAR -->
-<div class="navbar">
-    <h2>🌍 LinguaConnect</h2>
-
-    <div class="nav-links">
-        <a href="#">Como Funciona</a>
-        <a href="#">Idiomas</a>
-        <a href="#">Comunidade</a>
-
-        <a href="/login/"><button class="btn btn-login">Entrar</button></a>
-        <a href="/cadastro/"><button class="btn btn-cadastro">Cadastrar</button></a>
-    </div>
-</div>
+    
+{% include 'usuarios/navbar.html' %}
 
 <!-- 🔥 HERO -->
 <div class="hero">
@@ -198,7 +187,6 @@
             <button class="btn-primary">Comece Agora</button>
         </a>
 
-        <button class="btn-secondary">Saiba mais</button>
     </div>
 
     <div class="chat-mock">
@@ -233,50 +221,40 @@
 
     </div>
 
-    <a href="#" class="ver-todos">Ver todos os idiomas →</a>
 
 </div>
 
-<!-- 💬 TESTEMUNHOS -->
-<div class="testemunhos">
+<div class="testimonials">
 
     <h2>O Que Dizem Nossos Usuários</h2>
-    <p>Histórias reais de pessoas que melhoraram suas habilidades linguísticas com o LinguaConnect.</p>
+    <p class="subtitle">
+        Histórias reais de pessoas que melhoraram suas habilidades linguísticas com o LinguaConnect.
+    </p>
 
-    <div class="cards-testemunhos">
+    <div class="testimonials-container">
 
-        <div class="card-test">
+        <div class="testimonial-card">
             <h3>Marcelo Silva</h3>
             <span>Brasil • Aprendendo Espanhol</span>
-            <p>
-                "O LinguaConnect transformou minha forma de aprender espanhol.
-                Conversar com nativos todos os dias acelerou muito meu aprendizado."
-            </p>
-            ⭐⭐⭐⭐⭐
+            <p>"O LinguaConnect transformou minha forma de aprender espanhol..."</p>
+            <div class="stars">★★★★★</div>
         </div>
 
-        <div class="card-test">
+        <div class="testimonial-card">
             <h3>Juliana Costa</h3>
             <span>Brasil • Aprendendo Francês</span>
-            <p>
-                "Encontrei parceiros incríveis! Aprender ficou muito mais divertido
-                e natural com conversas reais."
-            </p>
-            ⭐⭐⭐⭐⭐
+            <p>"Encontrei parceiros incríveis! Aprender ficou muito mais divertido..."</p>
+            <div class="stars">★★★★★</div>
         </div>
 
-        <div class="card-test">
+        <div class="testimonial-card">
             <h3>Ricardo Mendes</h3>
             <span>Portugal • Professor de Inglês</span>
-            <p>
-                "Recomendo a todos meus alunos. A prática conversacional aqui é
-                excelente e muito eficiente."
-            </p>
-            ⭐⭐⭐⭐⭐
+            <p>"Recomendo a todos meus alunos..."</p>
+            <div class="stars">★★★★★</div>
         </div>
 
     </div>
-
 </div>
 
 <!-- 🚀 CALL TO ACTION -->

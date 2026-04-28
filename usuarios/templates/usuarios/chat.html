@@ -112,8 +112,12 @@
         }
     </style>
 </head>
-<class="chat-page">
+<body class="chat-page"> 
 <body>
+
+
+
+
 
 <div class="navbar">
     ...
@@ -177,27 +181,37 @@ const chatSocket = new WebSocket(
     `${ws_scheme}://${window.location.host}/ws/chat/${userId}/`
 );
 
-// RECEBER
-chatSocket.onmessage = function(e) {
-    const data = JSON.parse(e.data);
-    adicionarMensagem(data.message, false);
-    mostrarNotificacao();
-};
-
 // ENVIAR
 function enviar() {
     let input = document.getElementById("mensagem");
     let texto = input.value;
 
+    console.log("DEBUG: Botão clicado. Texto:", texto);
+
     if (texto.trim() === "") return;
+
+    // Verifica se o socket está aberto antes de tentar enviar
+    if (chatSocket.readyState !== WebSocket.OPEN) {
+        console.error("DEBUG: Erro! Socket não está aberto. Estado:", chatSocket.readyState);
+        return;
+    }
 
     chatSocket.send(JSON.stringify({
         'message': texto
     }));
+    console.log("DEBUG: Mensagem enviada para o servidor via WebSocket");
 
     adicionarMensagem(texto, true);
     input.value = "";
 }
+
+// RECEBER
+chatSocket.onmessage = function(e) {
+    console.log("DEBUG: Mensagem recebida do servidor:", e.data);
+    const data = JSON.parse(e.data);
+    adicionarMensagem(data.message, false);
+    mostrarNotificacao();
+};
 
 // ADICIONAR NA TELA
 function adicionarMensagem(texto, isMe) {
@@ -218,6 +232,15 @@ function adicionarMensagem(texto, isMe) {
     chatBox.appendChild(div);
     chatBox.scrollTop = chatBox.scrollHeight;
 }
+
+// Adicione isto no seu script
+chatSocket.onopen = function(e) {
+    console.log("✅ WebSocket CONECTADO com sucesso!");
+};
+
+chatSocket.onerror = function(e) {
+    console.error("❌ ERRO no WebSocket:", e);
+};
 
 // NOTIFICAÇÃO
 function mostrarNotificacao() {

@@ -25,17 +25,26 @@ def cadastro(request):
 
 def login_view(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        print("POST:", request.POST)
+
+        username = request.POST.get('username').strip()
+        password = request.POST.get('senha').strip()
 
         usuarios = Usuario.objects.filter(username=username, password=password)
 
+        print("ENCONTRADOS:", usuarios)  # DEBUG
+
         if usuarios.exists():
-            # SALVA O USUÁRIO NA SESSÃO
-            request.session['usuario_id'] = usuarios.first().id
-            request.session['usuario_nome'] = username
-            return redirect('dashboard')  # usa redirect para dashboard
+            user = usuarios.first()
+
+            request.session['usuario_id'] = user.id
+            request.session['usuario_nome'] = user.username
+
+            print("LOGIN OK")  # DEBUG
+
+            return redirect('dashboard')
         else:
+            print("LOGIN FALHOU")  # DEBUG
             return render(request, 'usuarios/login.html', {'erro': 'Usuário inválido'})
 
     return render(request, 'usuarios/login.html')
@@ -81,10 +90,40 @@ def match(request):
     if not usuario_logado:
         return redirect('home')
 
-    usuario = Usuario.objects.filter(username=usuario_logado).first()
-    
-    # 🔥 MOSTRA TODOS MENOS ELE MESMO
-    sugestoes = Usuario.objects.exclude(id=usuario.id)
+    user = Usuario.objects.filter(username=usuario_logado).first()
+    outros = Usuario.objects.exclude(id=user.id)
+
+    sugestoes_com_score = []
+
+    for outro in outros:
+        score = 0
+
+        # 🎯 MATCH DE IDIOMA
+        if user.idioma_nativo == outro.idioma_aprendizado:
+            score += 50
+
+        if user.idioma_aprendizado == outro.idioma_nativo:
+            score += 50
+
+        # 🎯 MATCH DE INTERESSES
+        if user.interesses and outro.interesses:
+            interesses_user = set(user.interesses.lower().split(','))
+            interesses_outro = set(outro.interesses.lower().split(','))
+
+            comuns = interesses_user.intersection(interesses_outro)
+            score += len(comuns) * 10
+
+        sugestoes_com_score.append((outro, score))
+
+    # 🔥 ORDENA PELOS MELHORES
+    sugestoes_com_score.sort(key=lambda x: x[1], reverse=True)
+
+    # 🔥 AQUI ESTÁ O SEGREDO
+    sugestoes = []
+
+    for outro, score in sugestoes_com_score:
+        outro.score = min(score, 100)  # limita até 100%
+        sugestoes.append(outro)
 
     return render(request, 'usuarios/match.html', {
         'sugestoes': sugestoes

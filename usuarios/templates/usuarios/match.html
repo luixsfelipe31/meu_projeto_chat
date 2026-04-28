@@ -3,58 +3,63 @@
 <html>
 <head>
     <title>Match</title>
-    <link rel="stylesheet" href="{% static 'usuarios/style.css' %}?v=10">
+    <link rel="stylesheet" href="{% static 'usuarios/style.css' %}?v=30">
 </head>
 <body>
+    
+{% include 'usuarios/navbar.html' %}
 
-<div class="tinder-container">
+    {% include 'usuarios/footer.html' %}
 
-    {% for user in sugestoes %}
-        <div class="tinder-card">
+<!-- HERO -->
+<div class="hero-match">
+    <h1>Encontre pessoas ideais para você</h1>
+    <p>Baseado em interesses e objetivos de aprendizado</p>
+</div>
 
-            <h2>👤 {{ user.username }}</h2>
+<!-- MATCH -->
+<div class="match-container">
 
-            <p><strong>🌍 Nativo:</strong> {{ user.idioma_nativo }}</p>
-            <p><strong>📚 Aprende:</strong> {{ user.idioma_aprendizado }}</p>
-            <p><strong>🎯 Interesses:</strong> {{ user.interesses }}</p>
+    <h2>🔥 Sugestões para você</h2>
 
-            <!-- 🔥 BOTÃO DE CHAT -->
+    <div class="carousel">
+
+        {% for user in sugestoes %}
+        <div class="card">
+
+            <!-- BADGE -->
+            <div class="badge">
+                {{ user.score|default:"80" }}% match
+            </div>
+
+            <!-- AVATAR -->
+            <div class="avatar">
+                {{ user.username|first|upper }}
+            </div>
+
+            <!-- NOME -->
+            <h3>{{ user.username }}</h3>
+
+            <!-- IDIOMAS -->
+            <p class="idiomas">
+                🌎 {{ user.idioma_nativo }} → {{ user.idioma_aprendizado }}
+            </p>
+
+            <!-- INTERESSES -->
+            <p class="interesses">
+                {{ user.interesses|default:"Sem interesses" }}
+            </p>
+
+            <!-- BOTÃO -->
             <a href="/chat/{{ user.id }}/">
-                <button style="margin-top:10px;">💬 Conversar</button>
+                <button>Conversar</button>
             </a>
 
         </div>
-    {% empty %}
-        <p>Nenhum match encontrado 😢</p>
-    {% endfor %}
+        {% endfor %}
 
-    <div class="tinder-buttons">
-        <button onclick="nextCard()">❌</button>
-        <button onclick="nextCard()">👍</button>
     </div>
 
 </div>
-
-<script>
-let current = 0;
-const cards = document.querySelectorAll('.tinder-card');
-
-function showCard(index) {
-    cards.forEach((card, i) => {
-        card.style.display = i === index ? 'block' : 'none';
-    });
-}
-
-function nextCard() {
-    current++;
-    if (current >= cards.length) {
-        current = 0;
-    }
-    showCard(current);
-}
-
-showCard(current);
-</script>
-
 </body>
 </html>

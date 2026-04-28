@@ -122,7 +122,27 @@ STATIC_URL = 'static/'
 
 
 # Configuração do Channels
-ASGI_APPLICATION = 'meu_projeto.asgi.application'
+ASGI_APPLICATION = 'projeto.asgi.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
+
+
+# settings.py
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Adicione isto para garantir que o Django ache a pasta static
+STATICFILES_DIRS = [
+    BASE_DIR / 'usuarios/static', 
+]
+
+
+# Configuração do Channels
+ASGI_APPLICATION = 'projeto.asgi.application'
 
 CHANNEL_LAYERS = {
     "default": {

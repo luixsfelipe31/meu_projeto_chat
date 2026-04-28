@@ -3,52 +3,122 @@
 <html>
 <head>
     <title>Dashboard</title>
-    <link rel="stylesheet" href="{% static 'usuarios/style.css' %}?v=5">
+
+    <link rel="stylesheet" href="{% static 'usuarios/style.css' %}">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+        }
+
+        /* NAVBAR (igual home) */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .navbar h2 {
+            color: #2563eb;
+        }
+
+        .nav-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #334155;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-login {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-cadastro {
+            background: #22c55e;
+            color: white;
+        }
+
+        /* HERO DASHBOARD */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(to right, #3b82f6, #22c55e);
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        .btn-main {
+            background: white;
+            color: #2563eb;
+            padding: 15px 30px;
+            border-radius: 8px;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .btn-main:hover {
+            background: #e5e7eb;
+        }
+
+        /* CARD INFO */
+        .info {
+            padding: 60px;
+            text-align: center;
+        }
+
+        .info p {
+            color: #64748b;
+            max-width: 600px;
+            margin: auto;
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="dashboard-container">
+{% include 'usuarios/navbar.html' %}
 
-    <header>
-        <h1>🌍 Minha Plataforma</h1>
+<!-- HERO -->
+<div class="hero">
+    <h1>Bem-vindo, {{ usuario_nome }} 👋</h1>
 
-        <a href="/login/">
-            <button class="btn-logout">Sair</button>
-        </a>
-    </header>
-    <h2>Bem-vindo, {{ usuario_nome }} 👋</h2>
-    <h3>O que você quer fazer hoje?</h2>
+    <p>
+        Encontre parceiros de idioma compatíveis com você e comece a praticar agora mesmo.
+    </p>
 
-    <div class="cards">
+    <a href="/match/">
+        <button class="btn-main">🔍 Encontrar Parceiro</button>
+    </a>
+</div>
 
-        <div class="card">
-            <h2>👥 Encontrar parceiro</h2>
-            <p>Conecte-se com pessoas para praticar idiomas</p>
-            <a href="/match/">
-            <button>Explorar</button>
-            </a> 
-        </div>
-
-        <div class="card">
-            <h2>💬 Chat</h2>
-            <p>Converse com seus parceiros</p>
-            <button>Abrir</button>
-        </div>
-
-        <div class="card">
-            <h2>📚 Praticar</h2>
-            <p>Exercícios rápidos estilo Duolingo</p>
-            <button>Começar</button>
-        </div>
-
-        <div class="card">
-            <h2>📈 Progresso</h2>
-            <p>Veja sua evolução</p>
-            <button>Ver</button>
-        </div>
-
-    </div>
-
+<!-- INFO -->
+<div class="info">
+    <p>
+        Nosso sistema conecta você com pessoas que possuem interesses e objetivos semelhantes,
+        facilitando o aprendizado de idiomas de forma prática e interativa.
+    </p>
 </div>
 
 </body>
