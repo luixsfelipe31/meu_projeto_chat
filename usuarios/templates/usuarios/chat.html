@@ -112,9 +112,6 @@
         }
     </style>
 </head>
-<body class="chat-page"> 
-<body>
-
 
 
 
@@ -181,6 +178,18 @@ const chatSocket = new WebSocket(
     `${ws_scheme}://${window.location.host}/ws/chat/${userId}/`
 );
 
+
+
+
+document.getElementById("mensagem").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault(); // Impede o pulo de linha
+        enviar(); // Chama sua função de enviar
+    }
+});
+
+
+
 // ENVIAR
 function enviar() {
     let input = document.getElementById("mensagem");
@@ -207,10 +216,16 @@ function enviar() {
 
 // RECEBER
 chatSocket.onmessage = function(e) {
-    console.log("DEBUG: Mensagem recebida do servidor:", e.data);
     const data = JSON.parse(e.data);
-    adicionarMensagem(data.message, false);
-    mostrarNotificacao();
+    console.log("DEBUG: Mensagem recebida do servidor:", data);
+
+    // Mude '22' pelo ID do usuário logado ou use uma variável dinâmica do Django
+    const meuId = "{{ request.session.usuario_id }}"; 
+
+    // SÓ ADICIONA SE NÃO FOR EU (porque eu já adicionei ao clicar em enviar)
+    if (String(data.sender) !== String(meuId)) {
+        adicionarMensagem(data.message, false);
+    }
 };
 
 // ADICIONAR NA TELA

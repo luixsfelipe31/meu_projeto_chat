@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/6.0/howto/deployment/asgi/
 import os
 import django
 from channels.routing import ProtocolTypeRouter, URLRouter
-from channels.sessions import SessionMiddlewareStack
+from channels.auth import AuthMiddlewareStack # Use AuthMiddlewareStack para garantir
 from django.core.asgi import get_asgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'projeto.settings')
@@ -19,7 +19,7 @@ import usuarios.routing
 
 application = ProtocolTypeRouter({
     "http": get_asgi_application(),
-    "websocket": SessionMiddlewareStack(
+    "websocket": AuthMiddlewareStack( # Mudamos para Auth para ser mais robusto
         URLRouter(
             usuarios.routing.websocket_urlpatterns
         )

@@ -1,4 +1,4 @@
-#!/home/felipeluix/projeto_tcc/tcc_platform/tcc_novo/meu_projeto/venv/bin/python3.12
+#!/home/felipeluix/projeto_tcc/tcc_platform/tcc_novo/meu_projeto/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
