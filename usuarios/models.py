@@ -27,6 +27,7 @@ class Mensagem(models.Model):
     destinatario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='mensagens_recebidas')
     texto = models.TextField()
     criado_em = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=20, default='enviada')
 
     def __str__(self):
         return f"{self.remetente} -> {self.destinatario}"

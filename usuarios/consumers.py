@@ -1,7 +1,4 @@
-import json
-from channels.generic.websocket import AsyncWebsocketConsumer
-from channels.db import database_sync_to_async
-from .models import Mensagem, Usuario # Ajuste o nome conforme seu model
+
 
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
@@ -62,7 +59,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             Mensagem.objects.create(
                 remetente=remetente,
                 destinatario=destinatario,
-                conteudo=message # Verifique se no seu models.py o campo chama 'conteudo'
+                texto=message # Verifique se no seu models.py o campo chama 'conteudo'
             )
             print(f"💾 Mensagem salva no banco!")
         except Exception as e:

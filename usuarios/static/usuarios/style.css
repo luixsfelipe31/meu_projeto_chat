@@ -540,3 +540,87 @@ input:focus {
     color: #475569;
     margin-right: 10px;
 }
+
+/* A div que envolve a mensagem */
+.message {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* Alinhamento: Minha mensagem à direita, do outro à esquerda */
+.message.me {
+    justify-content: flex-end;
+}
+
+.message.other {
+    justify-content: flex-start;
+}
+
+/* O BALÃO EM SI */
+.bubble {
+    padding: 8px 12px;
+    border-radius: 18px;
+    max-width: 60%; /* Impede que o balão ocupe a tela toda */
+    word-wrap: break-word; /* Faz o texto quebrar linha se for longo */
+    position: relative;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Cores */
+.me .bubble {
+    background-color: #007bff;
+    color: white;
+    border-bottom-right-radius: 2px; /* Pontinha do balão */
+}
+
+.other .bubble {
+    background-color: #e9e9eb;
+    color: black;
+    border-bottom-left-radius: 2px;
+}
+
+/* Container das mensagens */
+#chat-box {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    height: 400px; /* Ou a altura que você preferir */
+    overflow-y: auto;
+    background: #f0f2f5;
+}
+
+/* Estrutura da linha da mensagem */
+.message {
+    display: flex;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+/* Alinhamento */
+.message.me { justify-content: flex-end; }
+.message.other { justify-content: flex-start; }
+
+/* O Balão */
+.bubble {
+    padding: 8px 12px;
+    border-radius: 15px;
+    max-width: 65%; /* Aqui ele para de ser gigante */
+    word-wrap: break-word;
+    font-size: 14px;
+    position: relative;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.me .bubble {
+    background-color: #dcf8c6;
+    color: #000;
+    border-top-right-radius: 0;
+}
+
+.other .bubble {
+    background-color: #fff;
+    color: #000;
+    border-top-left-radius: 0;
+}

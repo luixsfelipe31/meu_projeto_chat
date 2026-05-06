@@ -4,18 +4,21 @@
     <div class="nav-links">
         <a href="/">Home</a>
         <a href="/match/">Match</a>
-        
 
-        <a href="/login/">
-            <button class="btn btn-login">Entrar</button>
-        </a>
+        {% if request.session.usuario_id %}
+            <a href="/chat/{{ request.session.usuario_id }}/">Conversas</a>
+            
+            <a href="/logout/">
+                <button class="btn btn-secondary" style="background: #64748b; color: white;">Sair</button>
+            </a>
+        {% else %}
+            <a href="/login/">
+                <button class="btn btn-login">Entrar</button>
+            </a>
 
-        <a href="/cadastro/">
-            <button class="btn btn-cadastro">Cadastrar</button>
-        </a>
-
-       
-
-        
+            <a href="/cadastro/">
+                <button class="btn btn-cadastro">Cadastrar</button>
+            </a>
+        {% endif %}
     </div>
 </div>

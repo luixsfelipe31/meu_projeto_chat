@@ -4,6 +4,8 @@ from django.http import JsonResponse
 from .models import Mensagem
 from django.shortcuts import render
 from django.http import HttpResponse
+import unicodedata
+
 
 def home(request):
     return render(request, 'usuarios/home.html')
@@ -87,43 +89,56 @@ def chat(request, user_id):
 def match(request):
     usuario_logado = request.session.get('usuario_nome')
 
+    # Segurança: Redireciona se não estiver logado
     if not usuario_logado:
         return redirect('home')
 
     user = Usuario.objects.filter(username=usuario_logado).first()
-    outros = Usuario.objects.exclude(id=user.id)
+    
+    # Se por algum motivo o user não existir no banco
+    if not user:
+        return redirect('home')
 
-    sugestoes_com_score = []
+    outros = Usuario.objects.exclude(id=user.id)
+    sugestoes = []
+
+    # 1. Prepara os interesses do usuário logado (limpos e sem acento)
+    # Criamos um SET para comparação ultra rápida
+    meus_interesses = set(
+        normalizar_texto(i) for i in user.interesses.split(',') if i.strip()
+    )
 
     for outro in outros:
         score = 0
+        
+        # --- 🎯 MATCH DE IDIOMA (Peso 40 cada) ---
+        if user.idioma_nativo == outro.idioma_aprendizado: 
+            score += 40
+        if user.idioma_aprendizado == outro.idioma_nativo: 
+            score += 40
 
-        # 🎯 MATCH DE IDIOMA
-        if user.idioma_nativo == outro.idioma_aprendizado:
-            score += 50
+        # --- 🎯 MATCH DE INTERESSES (Normalizado) ---
+        outro.interesses_comuns = [] # Inicializa lista vazia
+        if outro.interesses:
+            interesses_outro = set(
+                normalizar_texto(i) for i in outro.interesses.split(',') if i.strip()
+            )
 
-        if user.idioma_aprendizado == outro.idioma_nativo:
-            score += 50
+            # Interseção: O que os dois têm igual
+            comuns = meus_interesses.intersection(interesses_outro)
+            
+            # Adiciona 15 pontos para cada hobby em comum
+            score += len(comuns) * 15
+            
+            # Guardamos para mostrar no HTML (opcional)
+            outro.interesses_comuns = list(comuns)
 
-        # 🎯 MATCH DE INTERESSES
-        if user.interesses and outro.interesses:
-            interesses_user = set(user.interesses.lower().split(','))
-            interesses_outro = set(outro.interesses.lower().split(','))
-
-            comuns = interesses_user.intersection(interesses_outro)
-            score += len(comuns) * 10
-
-        sugestoes_com_score.append((outro, score))
-
-    # 🔥 ORDENA PELOS MELHORES
-    sugestoes_com_score.sort(key=lambda x: x[1], reverse=True)
-
-    # 🔥 AQUI ESTÁ O SEGREDO
-    sugestoes = []
-
-    for outro, score in sugestoes_com_score:
-        outro.score = min(score, 100)  # limita até 100%
+        # Atribui o score final limitado a 100%
+        outro.score = min(score, 100)
         sugestoes.append(outro)
+
+    # 🔥 ORDENAÇÃO: Os melhores matches primeiro
+    sugestoes.sort(key=lambda x: x.score, reverse=True)
 
     return render(request, 'usuarios/match.html', {
         'sugestoes': sugestoes
@@ -207,3 +222,12 @@ def enviar_mensagem(request, user_id):
 
 def como_funciona(request):
     return HttpResponse("FUNCIONOU")
+
+
+def normalizar_texto(texto):
+    if not texto:
+        return ""
+    # Remove acentos e caracteres especiais (ex: 'á' vira 'a')
+    texto_norm = unicodedata.normalize('NFKD', texto).encode('ASCII', 'ignore').decode('ASCII')
+    # Remove espaços sobrando e deixa tudo minusculo
+    return texto_norm.strip().lower()

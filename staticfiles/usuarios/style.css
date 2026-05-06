@@ -1,0 +1,542 @@
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+
+/* RESET */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+/* ================= NAV / HERO ================= */
+
+.hero-match {
+    background: linear-gradient(90deg, #3b82f6, #22c55e);
+    padding: 60px 20px;
+    text-align: center;
+    color: white;
+}
+
+.hero-match h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.hero-match p {
+    opacity: 0.9;
+}
+
+/* ================= MATCH ================= */
+
+.match-container {
+    padding: 40px;
+}
+
+/* CARROSSEL */
+.carousel {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 20px 0;
+    scroll-behavior: smooth;
+}
+
+.carousel::-webkit-scrollbar {
+    height: 8px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+/* CARD */
+.card {
+    min-width: 260px;
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* BADGE MATCH */
+.badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #22c55e;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+/* AVATAR */
+.avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #3b82f6;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: bold;
+    margin: 10px auto;
+}
+
+/* TEXTOS */
+.card h3 {
+    margin: 10px 0;
+}
+
+.interesses {
+    font-size: 14px;
+    margin: 10px 0;
+    color: #475569;
+}
+
+.idiomas {
+    font-size: 13px;
+    color: #64748b;
+}
+
+/* BOTÃO */
+.card button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background: #3b82f6;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.card button:hover {
+    background: #2563eb;
+}
+
+/* ================= CHAT ================= */
+
+.chat-page body {
+    background: #e5e7eb;
+}
+
+/* LAYOUT */
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 250px;
+    background: #1e293b;
+    color: white;
+    padding: 20px;
+}
+
+.user {
+    padding: 10px;
+    border-bottom: 1px solid #334155;
+    cursor: pointer;
+}
+
+.user:hover {
+    background: #334155;
+}
+
+/* CHAT AREA */
+.chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* HEADER */
+.chat-header {
+    background: #3b82f6;
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+}
+
+/* MENSAGENS */
+.chat-box {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #f1f5f9;
+}
+
+.message {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    max-width: 70%;
+}
+
+.me {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.other {
+    align-self: flex-start;
+}
+
+/* BOLHA */
+.bubble {
+    padding: 10px 15px;
+    border-radius: 15px;
+}
+
+.me .bubble {
+    background: #3b82f6;
+    color: white;
+    border-bottom-right-radius: 2px;
+}
+
+.other .bubble {
+    background: white;
+    border: 1px solid #cbd5e1;
+    border-bottom-left-radius: 2px;
+}
+
+/* TEMPO */
+.time {
+    font-size: 10px;
+    margin-top: 5px;
+    opacity: 0.6;
+}
+
+/* INPUT */
+.chat-input {
+    display: flex;
+    padding: 15px;
+    background: white;
+    border-top: 1px solid #cbd5e1;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 20px;
+    border: 1px solid #cbd5e1;
+    outline: none;
+}
+
+.chat-input button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.chat-input button:hover {
+    background: #2563eb;
+}
+
+.chat-header {
+    background: #3b82f6;
+    color: white;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+}
+
+.header-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar-header {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    color: #3b82f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+#status-user {
+    font-size: 12px;
+    color: #bbf7d0;
+}
+.status {
+    font-size: 12px;
+    margin-left: 5px;
+    color: #64748b;
+}
+
+/* NAVBAR */
+.navbar {
+    width: 100%;
+    height: 70px;
+    background: #f8fafc;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 40px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* LOGO */
+.navbar h2 {
+    color: #2563eb;
+    font-size: 22px;
+    margin: 0;
+}
+
+/* LINKS */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #334155;
+    font-size: 14px;
+}
+
+/* BOTÕES */
+.btn {
+    padding: 8px 15px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* ENTRAR */
+.btn-login {
+    background: #3b82f6;
+    color: white;
+}
+
+/* CADASTRAR */
+.btn-cadastro {
+    background: #22c55e;
+    color: white;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* CONTAINER CENTRAL */
+.form-container {
+    height: calc(100vh - 70px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0px; /* controla a altura */
+}
+
+/* BOX */
+.form-box {
+    width: 350px;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+/* TÍTULO */
+.form-box h2 {
+    margin-bottom: 20px;
+}
+
+/* INPUTS */
+.form-box input {
+    width: 80%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    outline: none;
+}
+
+/* BOTÃO */
+.form-box button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: #2c70dd;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.form-box button:hover {
+    background: #16a34a;
+}
+
+/* LINK LOGIN */
+.login-link {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-link a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+/* TESTIMONIALS */
+.testimonials {
+    padding: 60px 20px;
+    text-align: center;
+    background: #f8fafc;
+}
+
+.testimonials h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #64748b;
+    margin-bottom: 40px;
+}
+
+/* CARDS */
+.testimonials-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.testimonial-card {
+    width: 280px;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    text-align: left;
+}
+
+.testimonial-card h3 {
+    margin-bottom: 5px;
+}
+
+.testimonial-card span {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.testimonial-card p {
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.stars {
+    color: #facc15;
+    font-size: 18px;
+}
+
+.cta {
+    padding: 60px 20px;
+    text-align: center;
+    background: linear-gradient(90deg, #3b82f6, #22c55e);
+    color: white;
+}
+
+.cta button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    background: white;
+    color: #3b82f6;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+
+.card {
+    transition: 0.25s;
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+.badge {
+    background: linear-gradient(90deg, #22c55e, #4ade80);
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+input:focus {
+    border: 1px solid var(--primary);
+    box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.user-logado {
+    font-size: 14px;
+    color: #475569;
+    margin-right: 10px;
+}
