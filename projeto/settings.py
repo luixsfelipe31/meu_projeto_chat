@@ -23,10 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-1um#)mtl%6lxps62qu!m5&kks&)mcjxz_k^1rfh)3mwvfq54fw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://meu-projeto-chat.onrender.com']
+CSRF_TRUSTED_ORIGINS = [
+    'https://meu-projeto-chat.onrender.com',
+]
 
 # Application definition
 
